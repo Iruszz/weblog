@@ -3,33 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
-class ArticleController extends Controller
+class SessionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        return view('/auth/login', ['hideNav' => true]);
     }
 
-    /**
+        /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('items.create');
+
+        return view('articles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $attributes = request()->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+
+        if (! Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
+            'email' => 'The provided credentials are incorrect.',
+            'password' => 'The provided credentials are incorrect.'
+            ]);
+        }
+
+        request()->session()->regenerate();
+    
+        return redirect('/articles');
     }
 
     /**
