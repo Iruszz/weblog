@@ -10,7 +10,7 @@ class SessionController extends Controller
 {
     public function index()
     {
-        return view('/auth/login', ['hideNav' => true]);
+        return view('auth.login');
     }
 
         /**
@@ -18,7 +18,6 @@ class SessionController extends Controller
      */
     public function create()
     {
-
         return view('articles.create');
     }
 
@@ -71,8 +70,10 @@ class SessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        Auth::logout();
+
+        return redirect('/');
     }
 }
