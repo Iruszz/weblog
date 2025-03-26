@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
+use App\Models\User;
 
 class ArticleController extends Controller
 {
+    public function userArticles(User $user) {
+        $articles = $user->articles;
+        return view('articles.user_articles', compact('user', 'articles'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,15 +41,9 @@ class ArticleController extends Controller
             'body' => 'required|string',
         ]);
 
-        $article = Article::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'user_id' => auth()->id(),
-        ]);
-
         $article = Article::create($request);
 
-        $article->users()->attach(auth()->id());
+        $article->users()->attach(Auth::id());
 
         return redirect()->route('articles.index')->with('success', 'Article created successfully.');
     }

@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    public function user()
+        public function userArticles()
     {
         return $this->belongsTo(User::class);
     }

@@ -9,8 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 
-class RegisteredUserController extends Controller
+class Usercontroller extends Controller
 {
+    public function userArticles(User $user) {
+        $articles = $user->articles;
+    
+        return view('articles.user_articles', compact('user', 'articles'));
+    }
+    
+
     public function create() {
         return view('auth.register');
     }
@@ -29,7 +36,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/articles');
+        return redirect()->route('user.articles', ['user' => $user->id]);
 
     }
 }

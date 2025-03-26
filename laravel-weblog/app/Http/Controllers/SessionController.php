@@ -39,8 +39,10 @@ class SessionController extends Controller
         }
 
         request()->session()->regenerate();
+
+        $user = auth()->user();
     
-        return redirect('/articles');
+        return redirect()->route('user.articles', ['user' => $user]);
     }
 
     /**
