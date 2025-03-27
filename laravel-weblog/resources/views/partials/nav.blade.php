@@ -5,7 +5,12 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="/articles" class="{{ request()->is('articles') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Articles</a>
+            <a href="/articles" class="{{ request()->is('articles') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+              <span>Articles</span>
+            </a>
+            <button class="{{ request()->is('') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">
+                    <span>My articles</span>
+            </button>
           </div>
         </div>
       </div>
@@ -15,16 +20,40 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               @guest
-                <a href="/login" class="{{ request()->is('login') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Log in</a>
-                <a href="/register" class="{{ request()->is('register') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Register</a>
+                <a href="/login" class="{{ request()->is('login') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+                  <span>Log in</span>
+                </a>
+                <a href="/register" class="{{ request()->is('register') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+                  <span>Register</span>
+                </a>
               @endguest
 
               @auth
-                <form method="POST" action="/logout">
-                  @csrf
+              <div class="relative ml-3">
+                <div class="hidden sm:ml-6 sm:block">
+                  <div class="flex space-x-4">
+                    <a href="{{ route('articles.create') }}" 
+                    class="{{ request()->is('articles/create') ? 'bg-gray-900 text-white' : 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' }} flex items-center space-x-2 rounded-md px-3 py-1 text-sm font-medium">
+                      <x-eva-plus-circle-outline class="w-6 h-6"/>
+                      <span>New article</span>
+                    </a>
 
-                  <button class="{{ request()->is('logout') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Log out</button>
-                </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative ml-3">
+                <div class="hidden sm:ml-6 sm:block">
+                  <div class="flex space-x-4">
+                    <form method="POST" action="/logout">
+                      @csrf
+                      <button class="{{ request()->is('logout') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">
+                        <span>Log out</span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
               @endauth
 
             </div>

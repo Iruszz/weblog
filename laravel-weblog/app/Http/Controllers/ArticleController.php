@@ -10,7 +10,7 @@ use App\Models\User;
 class ArticleController extends Controller
 {
     public function userArticles(User $user) {
-        $articles = $user->articles;
+        $articles = Article::with('user')->get();
         return view('articles.user_articles', compact('user', 'articles'));
     }
 
@@ -19,8 +19,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        $articles = Article::with('user')->get();
+        $user = Auth::user();
+        return view('articles.index', compact('articles', 'user'));
     }
 
     /**

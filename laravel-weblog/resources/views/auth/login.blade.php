@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Page Title')
-
 @section('content')
 
 <div class="flex min-h-auto pt-50 flex-col justify-center px-6 py-12 lg:px-8">
