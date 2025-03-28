@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Article;
+use App\Models\User;
 
 class ArticleSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory()->count(20)->create();
+        Article::factory()->count(20)->create([
+            'user_id' => User::inRandomOrder()->first()->id,
+        ]);
     }
 }

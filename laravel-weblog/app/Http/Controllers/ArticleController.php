@@ -29,7 +29,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $articles = Article::with('user')->get();
+        $user = Auth::user();
+        return view('articles.create', compact('articles', 'user'));
     }
 
     /**
@@ -42,11 +44,15 @@ class ArticleController extends Controller
             'body' => 'required|string',
         ]);
 
-        $article = Article::create($request);
+        $article = new Article();
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $article->user_id = auth()->user()->id;
 
-        $article->users()->attach(Auth::id());
+        $article->save();
 
-        return redirect()->route('articles.index')->with('success', 'Article created successfully.');
+        return redirect()->route('user.articles', ['user' => auth()->user()->id])
+        ->with('success', 'Article created successfully.');
     }
 
     /**

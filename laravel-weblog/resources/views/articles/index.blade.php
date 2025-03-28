@@ -4,7 +4,7 @@
 @section('heading', 'All articles')
 
 @section('content')
-    <div class="bg-white">
+<div class="bg-white">
   <div class="mx-auto max-w-7xl lg:px-8">
     <div class="mx-auto mt-5 pb-15 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         @foreach ($articles as $article)
@@ -23,16 +23,19 @@
                 <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">{{ $article->body }}</p>
                 </div>
                 <div class="relative mt-8 flex items-center gap-x-4">
-                <img src="{{ asset('storage/' . $article->user->profile_picture) }}" alt="Profile Picture" class="size-10 rounded-full bg-gray-50">
-                <div class="text-sm/6">
-                    <p class="font-semibold text-gray-900">
-                    <a href="#">
-                        <span class="absolute inset-0"></span>
-                        <p>{{ $article->user->name }}</p>
-                    </a>
-                    </p>
+                    <div class="size-15 overflow-hidden rounded-full bg-gray-50 flex items-center justify-center">
+                        <img src="{{ asset('storage/' . $article->user->profile_picture) }}" alt="Profile Picture" class="object-cover w-full h-full">
+                    </div>
+                    <div class="text-sm/6">
+                        <p class="font-semibold text-gray-900">
+                            <a href="#">
+                                <span class="absolute inset-0"></span>
+                                <p>{{ $article->user->name }}</p>
+                            </a>
+                        </p>
+                    </div>
                 </div>
-                </div>
+                
             </article>
         @endforeach
     </div>

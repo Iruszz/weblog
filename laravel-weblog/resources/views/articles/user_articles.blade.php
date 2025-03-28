@@ -10,39 +10,30 @@
     @if($articles->isEmpty())
         <p>This user has no articles yet.</p>
     @else
-        <div class="flex justify-center relative overflow-x-auto">
-            <table class="w-full mx-50 my-20 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Title
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Created At
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($articles as $article)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $article->title }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $article->created_at->format('M d, Y') }} <!-- Formatting created date -->
-                            </td>
-                            <td class="px-6 py-4">
-                                <!-- Add any actions here, like edit or delete buttons -->
-                                <a href="/articles/{{ $article->id }}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <div class="bg-white">
+        <div class="mx-auto max-w-7xl lg:px-8">
+          <div class="mx-auto mt-5 pb-15 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+              @foreach ($articles as $article)
+                  <article class="flex max-w-xl flex-col items-start justify-between">
+                      <div class="flex items-center gap-x-4 text-xs">
+                      <time datetime="2020-03-16" class="text-gray-500">{{ $article->created_at->format('M d, Y') }}</time>
+                      <a href="#" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
+                      </div>
+                      <div class="group relative">
+                      <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
+                          <a href="#">
+                          <span class="absolute inset-0"></span>
+                          {{ $article->title }}
+                          </a>
+                      </h3>
+                      <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">{{ $article->body }}</p>
+                      </div>
+                      
+                  </article>
+              @endforeach
+          </div>
         </div>
+      </div>
     @endif
 
 @endsection
