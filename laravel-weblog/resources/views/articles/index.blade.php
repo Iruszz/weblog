@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Articles')
-@section('heading', 'All articles')
+
+@section('header1')
+    @section('title', 'Articles')
+    @section('heading', 'All articles')
+@endsection
 
 @section('content')
 <div class="bg-white">

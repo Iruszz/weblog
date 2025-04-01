@@ -60,8 +60,9 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
+        $user = auth()->user();
         $article = Article::findOrFail($id);
-        return view('articles.show', compact('article'));
+        return view('articles.show', compact('article', 'user'));
     }
 
     /**

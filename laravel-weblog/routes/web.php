@@ -17,11 +17,11 @@ Route::get('/articles', [ArticleController::class, 'index'])->name('articles.ind
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::get('/articles/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-Route::get('articles/{id}', [ArticleController::class, 'show']);
+Route::get('articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/user/{user}/articles', [UserController::class, 'userArticles'])
     ->name('user.articles')
     ->middleware('auth');
-    
+
 Route::get('/register', [UserController::class, 'create']);
 Route::post('/register', [UserController::class, 'store']);
 

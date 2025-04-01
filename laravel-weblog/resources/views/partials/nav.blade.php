@@ -8,10 +8,12 @@
             <a href="/articles" class="{{ request()->is('articles') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
               <span>Articles</span>
             </a>
+            @auth
             <a href="{{ route('user.articles', ['user' => $user->id]) }}" 
               class="{{ request()->is('user/' . $user->id . '/articles') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">
                 <span>My articles</span>
             </a>
+            @endauth
           </div>
         </div>
       </div>
@@ -34,7 +36,7 @@
                     @unless(request()->is('articles/create'))
                       <a href="{{ route('user.articles', ['user' => auth()->user()->id]) }}" 
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center space-x-4 rounded-md px-3 py-1 text-sm font-medium">
-                          <span>My Articles</span>
+                          <span>New article</span>
                       </a>
                     @endunless
                   </div>
