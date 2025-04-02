@@ -70,7 +70,10 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = auth()->user();
+        $article = Article::findOrFail($id);
+
+        return view('articles.edit', compact('article', 'user'));
     }
 
     /**
@@ -78,7 +81,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+        return redirect()->route('articles.show', $article->id);
     }
 
     /**

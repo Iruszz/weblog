@@ -33,12 +33,12 @@
 
               @auth
                   <div class="flex space-x-4">
-                    @unless(request()->is('articles/create'))
-                      <a href="{{ route('user.articles', ['user' => auth()->user()->id]) }}" 
+                    @if (!request()->is('articles/create'))
+                      <a href="{{ route('articles.create') }}" 
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center space-x-4 rounded-md px-3 py-1 text-sm font-medium">
                           <span>New article</span>
                       </a>
-                    @endunless
+                    @endif
                   </div>
 
                   <div class="flex space-x-4">

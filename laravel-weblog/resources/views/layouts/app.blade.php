@@ -7,19 +7,20 @@
     <title>Document</title>
 </head>
 <body class="h-full">
-    @if (!isset($hideNav) || !$hideNav)
-        @include('partials.nav')
-    @endif
+    <div class="min-h-full">
+        @if (!isset($hideNav) || !$hideNav)
+            @include('partials.nav')
+        @endif
 
-    @if(view()->hasSection('header1') && !view()->hasSection('header2'))
-        @include('partials.header1')
-    @endif
+        @if(view()->hasSection('header1') && !view()->hasSection('header2'))
+            @include('partials.header1')
+        @endif
 
-    @yield('content')
+        @yield('content')
+    </div>
+
+    @if (!isset($hideFooter) || !$hideFooter)
+        @include('partials.footer')
+    @endif
 </body>
-
-@if (!isset($hideFooter) || !$hideFooter)
-    @include('partials.footer')
-@endif
-
 </html>

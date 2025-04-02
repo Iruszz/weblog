@@ -16,8 +16,10 @@ Route::get('/', function () {
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::get('/articles/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::patch('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
 Route::get('articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+
 Route::get('/user/{user}/articles', [UserController::class, 'userArticles'])
     ->name('user.articles')
     ->middleware('auth');

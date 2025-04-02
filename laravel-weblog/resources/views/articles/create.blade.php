@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'New article')
-@section('heading', 'create a new article')
+@section('header1')
+    @section('title', 'New acticle')
+    @section('heading', 'Create a new articles')
+@endsection
 
 @section('content')
-
-<div class="bg-white">
+<div class="min-h-full bg-white">
     <div class="mx-auto max-w-7xl lg:px-8">
         <form action="{{ route('articles.store') }}" method="POST">
             @csrf
