@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\User;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
@@ -63,6 +64,11 @@ class ArticleController extends Controller
         $user = auth()->user();
         $article = Article::findOrFail($id);
         return view('articles.show', compact('article', 'user'));
+
+        // $user = auth()->user();
+        // $article = Article::with('comments.user')->findOrFail($id);
+
+        // return view('articles.show', compact('article', 'user'));
     }
 
     /**

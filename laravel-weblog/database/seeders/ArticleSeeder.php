@@ -14,8 +14,6 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory()->count(20)->create([
-            'user_id' => User::inRandomOrder()->first()->id,
-        ]);
+        Article::factory()->count(20)->create();
     }
 }
