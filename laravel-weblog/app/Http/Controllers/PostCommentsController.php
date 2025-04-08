@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\User;
 
-class CommentController extends Controller
+class PostCommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +28,19 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Article $article)
     {
-        //
+
+        request()->validate([
+            'body' => 'required',
+        ]);
+
+       $article->comments()->create([
+        'user_id' => auth()->user()->id,
+        'body' => request('body'),
+       ]);
+
+       return back();
     }
 
     /**

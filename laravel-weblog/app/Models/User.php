@@ -8,19 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Comment extends Model
-{
-    use HasFactory;
-}
-
 class User extends Authenticatable
-{   
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
-    
-
+{      
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -56,5 +45,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
     }
 }

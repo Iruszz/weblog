@@ -63,12 +63,8 @@ class ArticleController extends Controller
     {
         $user = auth()->user();
         $article = Article::findOrFail($id);
-        return view('articles.show', compact('article', 'user'));
-
-        // $user = auth()->user();
-        // $article = Article::with('comments.user')->findOrFail($id);
-
-        // return view('articles.show', compact('article', 'user'));
+        return view('articles.show', compact('article', 'user'))
+            ->with('hideNav', true);
     }
 
     /**
