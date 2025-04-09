@@ -1,17 +1,13 @@
 @extends('layouts.app')
 
-@section('content')
-
-@section('title', $article->title)
-
 @section('header2')
 @endsection
 
-<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white antialiased">
+@section('content')
+
+<main class="pb-16 lg:pb-24 bg-white antialiased">
     <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
         <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue">
-
-            @include('partials.header2')
 
             <section class="not-format">
                 <p class="lead mb-10">

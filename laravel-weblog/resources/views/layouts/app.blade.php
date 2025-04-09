@@ -14,6 +14,9 @@
 
         @if(view()->hasSection('header1') && !view()->hasSection('header2'))
             @include('partials.header1')
+            
+        @elseif(view()->hasSection('header2'))
+            @include('partials.header2')
         @endif
 
         @yield('content')
@@ -22,5 +25,7 @@
     @if (!isset($hideFooter) || !$hideFooter)
         @include('partials.footer')
     @endif
+    
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </body>
 </html>

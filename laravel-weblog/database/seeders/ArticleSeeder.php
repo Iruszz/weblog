@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\Category;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,6 +15,15 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        Article::factory()->count(20)->create();
+        $categoryIds = Category::pluck('id');
+        
+        Article::factory()
+        ->count(20)
+        ->make()
+        ->each(function ($article) use ($categoryIds) {
+            $article->category_id = $categoryIds->random();
+            $article->user_id = User::inRandomOrder()->first()->id;
+            $article->save();
+        });
     }
 }

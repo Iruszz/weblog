@@ -59,21 +59,18 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
         $user = auth()->user();
-        $article = Article::findOrFail($id);
-        return view('articles.show', compact('article', 'user'))
-            ->with('hideNav', true);
+        return view('articles.show', compact('article', 'user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
         $user = auth()->user();
-        $article = Article::findOrFail($id);
 
         return view('articles.edit', compact('article', 'user'));
     }
@@ -81,9 +78,8 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
-        $article = Article::findOrFail($id);
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -97,10 +93,9 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
         $user = auth()->user();
-        $article = Article::findOrFail($id);
         $article->delete();
 
         return redirect()->route('user.articles', ['user' => auth()->user()->id])
