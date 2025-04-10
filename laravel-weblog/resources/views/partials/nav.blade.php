@@ -22,6 +22,10 @@
         <div class="relative ml-3">
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
+              @if(isset($showCategory) && $showCategory)
+                @include('partials.category')
+              @endif
+
               @guest
                 <a href="/login" class="{{ request()->is('login') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
                   <span>Log in</span>

@@ -21,7 +21,7 @@
         </button>
         <!-- Dropdown menu -->
         <div id="dropdownComment1"
-            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow ">
+            class="hidden w-36 bg-white rounded divide-y divide-gray-100 shadow ">
             <ul class="py-1 text-sm text-gray-700"
                 aria-labelledby="dropdownMenuIconHorizontalButton">
                 <li>

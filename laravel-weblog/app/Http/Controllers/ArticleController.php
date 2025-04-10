@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\User;
-use App\Models\Comment;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -20,9 +20,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('user')->get();
+        $articles = Article::with('user', 'category')->get();
         $user = Auth::user();
-        return view('articles.index', compact('articles', 'user'));
+        $categories = Category::all();
+        
+        return view('articles.index', compact('articles', 'user', 'categories'))->with('showCategory', true);
     }
 
     /**
