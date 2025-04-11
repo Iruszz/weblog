@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use Illuminate\Http\Request;
-use App\Models\Comment;
-use App\Models\User;
+use App\Models\Article;
 
 class PostCommentsController extends Controller
 {
@@ -30,7 +28,6 @@ class PostCommentsController extends Controller
      */
     public function store(Article $article)
     {
-
         request()->validate([
             'body' => 'required',
         ]);

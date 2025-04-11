@@ -24,6 +24,8 @@ Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name
 
 Route::post('articles/{article}/comments', [PostCommentsController::class, 'store'])->name('comments.store');
 
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+
 Route::get('user/{user}/articles', [UserController::class, 'userArticles'])
     ->name('user.articles')
     ->middleware('auth');

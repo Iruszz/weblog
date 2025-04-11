@@ -18,7 +18,7 @@
                 <a href="{{ route('articles.show', $article->id) }}">
                         <div class="flex items-center gap-x-4 text-xs">
                         <time datetime="2020-03-16" class="text-gray-500">{{ $article->created_at->format('M d, Y') }}</time>
-                        <span class="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ $article->category->name }}</span>
+                        <span class="relative rounded-full bg-{{ $article->category->color }} px-3 py-1.5 font-medium text-{{ BadgeColor($article->category->color)['text'] }} hover:bg-gray-100">{{ $article->category->name }}</span>
                     </div>
                     <div class="group relative">
                     <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
@@ -28,7 +28,7 @@
                     <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">{{ $article->body }}</p>
                     </div>
                     <div class="relative mt-8 flex items-center gap-x-4">
-                        <div class="size-15 overflow-hidden rounded-full bg-gray-50 flex items-center justify-center">
+                        <div class="w-14 h-14 overflow-hidden rounded-full bg-gray-50 flex items-center justify-center">
                             <img src="{{ asset('storage/' . $article->user->profile_picture) }}" alt="Profile Picture" class="object-cover w-full h-full">
                         </div>
                         <div class="text-sm/6">

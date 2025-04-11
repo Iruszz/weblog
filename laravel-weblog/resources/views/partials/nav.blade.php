@@ -9,7 +9,7 @@
               <span>Articles</span>
             </a>
             @auth
-            <a href="{{ route('user.articles', ['user' => $user->id]) }}" 
+            <a href="{{ route('user.articles', ['user' => auth()->user()->id]) }}" 
               class="{{ request()->is('user/' . $user->id . '/articles') ? 'bg-gray-900 text-white': 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">
                 <span>My articles</span>
             </a>

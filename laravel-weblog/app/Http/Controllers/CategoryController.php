@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -27,7 +28,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+        ]);
+
+        $randomColor = getRandomTailwindColor();
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->color = $randomColor;
+        $category->save();
+
+       return back();
     }
 
     /**

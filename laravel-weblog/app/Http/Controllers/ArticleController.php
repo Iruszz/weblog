@@ -24,7 +24,8 @@ class ArticleController extends Controller
         $user = Auth::user();
         $categories = Category::all();
         
-        return view('articles.index', compact('articles', 'user', 'categories'))->with('showCategory', true);
+        return view('articles.index', compact('articles', 'user', 'categories'))
+            ->with('showCategory', true);
     }
 
     /**
@@ -32,9 +33,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
         $articles = Article::with('user')->get();
         $user = Auth::user();
-        return view('articles.create', compact('articles', 'user'));
+        return view('articles.create', compact('articles', 'user', 'categories'));
     }
 
     /**
