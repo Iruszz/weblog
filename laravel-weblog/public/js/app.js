@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.category-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', () => {
@@ -30,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     createCategoryButton.addEventListener('click', (e) => {
       e.stopPropagation();
       createCategoryButton.style.display = 'none';
-      createCategoryInputWrapper.style.display = 'block';
+      createCategoryInputWrapper.style.display = 'flex';
     });
   
     document.addEventListener('click', function (event) {
@@ -42,7 +44,3 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-  
-
-    
-  
