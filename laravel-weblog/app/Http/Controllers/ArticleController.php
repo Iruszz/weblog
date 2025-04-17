@@ -55,13 +55,12 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->body = $request->body;
         $article->user_id = auth()->user()->id;
+        $article->category_id = Category::first()->id; // dit moet later anders
 
         if($request->hasFile('image')){
-            $file = request()->file('image');
-            $file->store('article_images', ['disk' => 'public']);
-
-            $article->image = $file;
-          };
+            $path = $request->file('image')->store('article_images', 'public');
+            $article->image = $path;
+        };
 
         $article->save();
 
@@ -86,8 +85,9 @@ class ArticleController extends Controller
         $categories = Category::all();
         $articles = Article::with('user', 'category')->get();
         $user = auth()->user();
+        $imagePath = $article->image;
 
-        return view('articles.edit', compact('article', 'user', 'categories'));
+        return view('articles.edit', compact('article', 'user', 'categories', 'imagePath'));
     }
 
     /**
@@ -99,7 +99,13 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        if($request->hasFile('image')){
+            $image = request()->file('image');
+            $image->update('article_images', ['disk' => 'public']);
+          };
 
         $article->update($request->all());
         return redirect()->route('articles.show', $article->id);

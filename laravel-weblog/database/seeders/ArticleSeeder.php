@@ -29,7 +29,7 @@ class ArticleSeeder extends Seeder
             $article->category_id = $categoryIds->random();
             $article->user_id = User::inRandomOrder()->first()->id;
             $randomImage = $files->random();
-            $article->image = $randomImage;
+            $article->image = 'article_images/' . $randomImage;
 
             $article->save();
         });
