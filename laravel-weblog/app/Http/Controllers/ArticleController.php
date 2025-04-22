@@ -80,8 +80,12 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit(Request $request, Article $article)
     {
+        if ($request->user()->cannot('edit', $article)) {
+            abort(403);
+        }
+
         $categories = Category::all();
         $articles = Article::with('user', 'category')->get();
         $user = auth()->user();
@@ -95,6 +99,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        if ($request->user()->cannot('edit', $article)) {
+            abort(403);
+        }
 
         $request->validate([
             'title' => 'required|string|max:255',
