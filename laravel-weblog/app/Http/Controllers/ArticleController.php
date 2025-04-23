@@ -55,7 +55,8 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->body = $request->body;
         $article->user_id = auth()->user()->id;
-        $article->category_id = Category::first()->id; // dit moet later anders
+        $article->category_id = $request->category_id;
+        // $article->category_id = Category::first()->id; // dit moet later anders
 
         if($request->hasFile('image')){
             $path = $request->file('image')->store('article_images', 'public');
@@ -87,7 +88,6 @@ class ArticleController extends Controller
         }
 
         $categories = Category::all();
-        $articles = Article::with('user', 'category')->get();
         $user = auth()->user();
         $imagePath = $article->image;
 
