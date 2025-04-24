@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 
 class PostCommentsController extends Controller
 {
@@ -33,7 +34,7 @@ class PostCommentsController extends Controller
         ]);
 
        $article->comments()->create([
-        'user_id' => auth()->user()->id,
+        'user_id' => Auth::id(),
         'body' => request('body'),
        ]);
 

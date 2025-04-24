@@ -5,12 +5,27 @@
 
 @section('content')
 
-<main class="pb-16 lg:pb-24 bg-white antialiased">
+<main class="relative -mt-40 bg-white rounded-2xl px-4 ml-10 mr-10 pb-16 min-h-[calc(100vh-200px)]">
     <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-        <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue">
+        <article class="mx-auto w-full max-w-2xl mt-10 format format-sm sm:format-base lg:format-lg format-blue">
+            <div class="mx-auto w-full max-w-2xl py-8">
+                <address class="flex items-center mb-6 not-italic">
+                    <div class="inline-flex items-center mr-3 text-sm text-gray-900">
+                        <img class="mr-4 w-10 h-10 rounded-full" src="{{ asset('storage/' . $article->user->profile_picture) }}" alt="{{ $article->user->name }}">
+                        <div class="flex space-x-1">
+                            <a class="text-base text-gray-500">By</a>
+                            <a href="#" rel="author" class="text-base font-bold text-gray-900">{{ $article->user->name }}</a>
+                            <span class="pl-2 pr-2 text-gray-500">•</span>
+                            <p class="text-base text-gray-500">Graphic Designer, educator</p>
+                            <span class="pl-2 pr-2 text-gray-500">•</span>
+                            <p class="text-base text-gray-500"><time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ $article->created_at->format('M d, Y') }}</time></p>
+                        </div>
+                    </div>
+                </address>
+            </div>
 
             <section class="not-format">
-                <p class="lead mb-10">
+                <p class="lead mb-20">
                     {{ $article->body }}
                 </p>
             

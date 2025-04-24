@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-white">
+<html lang="en" class="min-h-screen bg-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,8 @@
     @vite('resources/css/app.css')
     <title>Document</title>
 </head>
-<body class="h-full">
-    <div class="min-h-full">
+<body class="min-h-screen flex flex-col">
+    <div class="flex-grow">
         @if (!isset($hideNav) || !$hideNav)
             @include('partials.nav')
         @endif

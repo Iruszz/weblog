@@ -45,18 +45,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
-        $article = new Article();
+        $article = new Article($validated);
         $article->title = $request->title;
         $article->body = $request->body;
-        $article->user_id = auth()->user()->id;
+        $article->user_id = Auth::id();
         $article->category_id = $request->category_id;
-        // $article->category_id = Category::first()->id; // dit moet later anders
 
         if($request->hasFile('image')){
             $path = $request->file('image')->store('article_images', 'public');
@@ -65,7 +65,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect()->route('user.articles', ['user' => auth()->user()->id])
+        return redirect()->route('user.articles', ['user' => Auth::id()])
         ->with('success', 'Article created successfully.');
     }
 
@@ -74,7 +74,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $user = auth()->user();
+        $user = Auth::user();
         return view('articles.show', compact('article', 'user'));
     }
 
@@ -88,7 +88,7 @@ class ArticleController extends Controller
         }
 
         $categories = Category::all();
-        $user = auth()->user();
+        $user = Auth::user();
         $imagePath = $article->image;
 
         return view('articles.edit', compact('article', 'user', 'categories', 'imagePath'));
@@ -103,18 +103,20 @@ class ArticleController extends Controller
             abort(403);
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if($request->hasFile('image')){
-            $image = request()->file('image');
-            $image->update('article_images', ['disk' => 'public']);
+            $path = $request->file('image')->store('article_images', 'public');
+            $validated['image'] = $path;
           };
 
-        $article->update($request->all());
+        $article->update($validated);
+        
         return redirect()->route('articles.show', $article->id);
     }
 
@@ -123,10 +125,10 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $article->delete();
 
-        return redirect()->route('user.articles', ['user' => auth()->user()->id])
+        return redirect()->route('user.articles', ['user' => Auth::id()])
         ->with('Article deleted');
     }
 
