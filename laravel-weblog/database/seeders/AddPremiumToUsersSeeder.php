@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class AddPremiumToUsersSeeder extends Seeder
 {
@@ -13,8 +13,10 @@ class AddPremiumToUsersSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('articles')->update([
-            'premium' => (bool) rand(0, 1)
-        ]);
+        User::all()->each(function ($article) {
+            $article->update([
+                'is_premium' => fake()->boolean(),
+            ]);
+        });
     }
 }

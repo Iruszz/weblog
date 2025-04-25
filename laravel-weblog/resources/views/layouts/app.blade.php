@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="min-h-screen bg-white">
+<html lang="en" class="bg-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body class="min-h-screen flex flex-col">
-    <div class="flex-grow">
+    <div class="min-h-screen flex-grow">
         @if (!isset($hideNav) || !$hideNav)
             @include('partials.nav')
         @endif

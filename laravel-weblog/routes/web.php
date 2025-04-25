@@ -5,7 +5,7 @@ use Illuminate\Support\Arr;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PostCommentsController;
 
@@ -29,6 +29,8 @@ Route::post('/categories', [CategoryController::class, 'store'])->name('categori
 Route::get('user/{user}/articles', [UserController::class, 'userArticles'])
     ->name('user.articles')
     ->middleware('auth');
+
+Route::get('premium', [PremiumController::class, 'index'])->name('premium.index');
 
 Route::get('register', [UserController::class, 'create']);
 Route::post('register', [UserController::class, 'store']);

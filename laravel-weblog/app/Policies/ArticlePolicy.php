@@ -21,7 +21,11 @@ class ArticlePolicy
      */
     public function view(User $user, Article $article): bool
     {
-        return false;
+        if (!$article->is_premium) {
+            return true;
+        }
+
+        return $user?->is_premium ?? false;
     }
 
     /**

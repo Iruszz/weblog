@@ -21,7 +21,9 @@ class ArticleController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $articles = Article::with('user', 'category')->get();
+        $articles = Article::with('user', 'category')->get()->filter(function ($article) {
+            return Auth::user() ? Auth::user()->can('view', $article) : !$article->is_premium;
+        });
         $user = Auth::user();
         
         return view('articles.index', compact('articles', 'user', 'categories'))

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('premium')->default(false);
+        Schema::table('articles', function (Blueprint $table) {
+            $table->boolean('is_premium')->default(false);
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('premium');
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropColumn('is_premium');
         });
     }
 };
