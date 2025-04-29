@@ -6,10 +6,18 @@
         <h1 class="w-full text-3xl font-extrabold leading-tight text-white lg:text-4xl">
             {{ $article->title }}
         </h1>
-        <span class="w-fit relative rounded-lg px-3.5 py-1
-            bg-transparent
-            border border-solid border-white
-            text-xs font-semibold text-white 
-            hover:bg-gray-100">{{ $article->category->name }}</span>
+        <div class="flex w-fit relative gap-3">
+            <span class="relative rounded-lg bg-purple-700 px-4 py-1.5 text-xs font-semibold text-white hover:bg-gray-100">
+                Premium content
+            </span>
+            <span class="rounded-lg px-3.5 py-1
+                bg-transparent
+                border border-solid border-white
+                text-xs font-semibold text-white 
+                hover:bg-gray-100">
+                {{ $article->category->name }}
+            </span>
+        </div>
+
     </div>
 </header>

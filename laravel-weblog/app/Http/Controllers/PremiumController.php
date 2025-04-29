@@ -33,7 +33,12 @@ class PremiumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $user->is_premium = true;
+        $user->save();
+
+        return redirect()->route('articles.index')
+        ->with('success', 'You now have premium access!');
     }
 
     /**

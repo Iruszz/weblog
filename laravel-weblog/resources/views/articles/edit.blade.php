@@ -71,6 +71,17 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="col-span-full">
+                            <div class="grid grid-cols-1 sm:grid-cols-6">
+                                <div class="sm:col-span-1">
+                                    <input id="is_premium" type="checkbox" name="is_premium" value="1" 
+                                        class="w-4 h-4 text-purple-600 bg-gray-100 border border-gray-300 rounded-sm"
+                                        @if(old('is_premium', $article->is_premium) == 1) checked @endif>
+                                    <label for="is_premium" class="ms-2 text-sm font-medium text-gray-900">Premium article</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

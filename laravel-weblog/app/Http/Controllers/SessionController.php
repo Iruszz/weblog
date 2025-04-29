@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\RedirectResponse;
 
 class SessionController extends Controller
 {
@@ -24,9 +25,9 @@ class SessionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(Request $request): RedirectResponse
     {
-        $attributes = request()->validate([
+        $attributes = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
@@ -38,7 +39,7 @@ class SessionController extends Controller
             ]);
         }
 
-        request()->session()->regenerate();
+        $request->session()->regenerate();
 
         $user = Auth::user();
     
@@ -72,9 +73,13 @@ class SessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(Request $request): RedirectResponse
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+ 
+        $request->session()->regenerateToken();
 
         return redirect('/');
     }

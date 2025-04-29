@@ -25,8 +25,14 @@
                 style="background-image: "
                 data-category-id="{{ $article->category_id }}">
                 <a href="{{ route('articles.show', $article->id) }}" class="w-full">
-                    <div class="flex flex-col w-full h-[400px] relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:w-full sm:max-w-lg bg-cover shadow-md"
+                    <div class="flex flex-col w-full h-[400px] relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:w-full sm:max-w-lg bg-cover shadow-md
+                        @if($article->is_premium) border-4 border-purple-700 bg-opacity-75 @else bg-opacity-100 @endif" 
                         style="background-image: linear-gradient(to top, #101828, #0000), url('{{ asset('storage/' . $article->image) }}')">
+                        <div class="w-fit h-fit pt-5 pl-5">
+                            @if($article->is_premium)
+                                <span class="relative rounded-lg bg-purple-700 px-4 py-1.5 text-xs font-semibold text-white hover:bg-gray-100">Premium content</span>
+                            @endif
+                        </div>
                         <div class="mt-auto mb-5 px-4 pt-5 sm:p-6 sm:pb-4">
                                 <span class="relative rounded-full bg-{{ $article->category->color }} px-3.5 py-1 text-xs font-semibold text-{{ BadgeColor($article->category->color)['text'] }} hover:bg-gray-100">{{ $article->category->name }}</span>
                                 <div class="flex items-center gap-x-4 text-xs font-semibold ">

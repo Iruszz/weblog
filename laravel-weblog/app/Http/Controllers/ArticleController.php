@@ -52,18 +52,21 @@ class ArticleController extends Controller
             'body' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'category_id' => 'required|exists:categories,id',
+            'is_premium' => 'nullable|boolean',
         ]);
-
-        $article = new Article($validated);
-        $article->title = $request->title;
-        $article->body = $request->body;
-        $article->user_id = Auth::id();
-        $article->category_id = $request->category_id;
 
         if($request->hasFile('image')){
             $path = $request->file('image')->store('article_images', 'public');
-            $article->image = $path;
         };
+
+        $article = Article::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'image' => $path ?? null,
+            'is_premium' => $request->has('is_premium') ? true : false,
+        ]);
 
         $article->save();
 
@@ -110,12 +113,15 @@ class ArticleController extends Controller
             'body' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'category_id' => 'required|exists:categories,id',
+            'is_premium' => 'nullable|boolean',
         ]);
 
         if($request->hasFile('image')){
             $path = $request->file('image')->store('article_images', 'public');
             $validated['image'] = $path;
           };
+
+        $validated['is_premium'] = $request->has('is_premium') ? true : false;
 
         $article->update($validated);
         

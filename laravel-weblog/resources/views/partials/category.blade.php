@@ -1,6 +1,6 @@
 <div class="flex relative z-10">
     <button id="dropdownDefault" data-dropdown-toggle="dropdown"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center space-x-4 rounded-md px-4 py-2 text-sm font-medium"
+      class="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 flex items-center space-x-4 rounded-md px-4 py-2 text-sm font-medium"
       type="button">
       Filter by category
       <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"

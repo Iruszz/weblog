@@ -31,10 +31,13 @@ Route::get('user/{user}/articles', [UserController::class, 'userArticles'])
     ->middleware('auth');
 
 Route::get('premium', [PremiumController::class, 'index'])->name('premium.index');
+Route::post('/premium', [PremiumController::class, 'store'])
+    ->middleware('auth')
+    ->name('premium.store');
 
-Route::get('register', [UserController::class, 'create']);
-Route::post('register', [UserController::class, 'store']);
+Route::get('register', [UserController::class, 'create'])->name('register.create');
+Route::post('register', [UserController::class, 'store'])->name('register.store');
 
-Route::get('login', [SessionController::class, 'index']);
-Route::post('login', [SessionController::class, 'store']);
-Route::post('logout', [SessionController::class, 'destroy']);
+Route::get('login', [SessionController::class, 'index'])->name('login.index');
+Route::post('login', [SessionController::class, 'store'])->name('login.store');
+Route::post('logout', [SessionController::class, 'destroy'])->name('logout.destroy');
