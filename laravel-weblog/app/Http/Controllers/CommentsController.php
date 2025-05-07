@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
-class PostCommentsController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,16 +29,19 @@ class PostCommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Article $article)
+    public function store(StoreArticleRequest $request)
     {
-        request()->validate([
-            'body' => 'required',
-        ]);
+        $validated = $request->validated();
 
-       $article->comments()->create([
-        'user_id' => Auth::id(),
-        'body' => request('body'),
-       ]);
+        $validated['user_id'] = Auth::id();
+        
+        Comment::create($validated);
+
+        // TODO Needing to edit
+        // $article->comments()->create([
+        //     'user_id' => Auth::id(),
+        //     'body' => request('body'),
+        // ]);
 
        return back();
     }

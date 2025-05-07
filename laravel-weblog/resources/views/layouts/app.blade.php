@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Marketplace</title>
 </head>
 <body class="min-h-screen flex flex-col">
     <div class="min-h-screen flex-grow">
@@ -13,19 +13,19 @@
             @include('partials.nav')
         @endif
 
-        @if(view()->hasSection('header1') && !view()->hasSection('header2'))
+        {{-- @if(view()->hasSection('header1') && !view()->hasSection('header2'))
             @include('partials.header1')
             
         @elseif(view()->hasSection('header2'))
             @include('partials.header2')
-        @endif
+        @endif --}}
 
         @yield('content')
     </div>
 
-    @if (!isset($hideFooter) || !$hideFooter)
+    {{-- @if (!isset($hideFooter) || !$hideFooter)
         @include('partials.footer')
-    @endif
+    @endif --}}
     
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 

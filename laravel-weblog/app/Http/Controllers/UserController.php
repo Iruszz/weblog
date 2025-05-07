@@ -22,15 +22,11 @@ class UserController extends Controller
         return view('auth.register', ['hideFooter' => true]);
     }
 
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
 
-        // Validate the request data
-        $attributes = request()->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        // TODO :: request voor maken
+        $validated = $request->validated();
 
         $user = User::create($attributes);
 

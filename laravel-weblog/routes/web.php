@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\PostCommentsController;
+use App\Http\Controllers\CommentsController;
 
 Route::get('/', function () {
     return redirect('/articles');
@@ -22,7 +22,7 @@ Route::patch('articles/{article}', [ArticleController::class, 'update'])->name('
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
-Route::post('articles/{article}/comments', [PostCommentsController::class, 'store'])->name('comments.store');
+Route::post('articles/{article}/comments', [CommentsController::class, 'store'])->name('comments.store');
 
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 

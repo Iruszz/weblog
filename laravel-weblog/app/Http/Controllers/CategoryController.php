@@ -26,15 +26,14 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        request()->validate([
-            'name' => 'required',
-        ]);
+        // TODO :: Request voor maken en mass assignment toepassen
+        $validated = $request->validated();
 
         $randomColor = getRandomTailwindColor();
 
-        $category = new Category();
+        $category = new Category($validated);
         $category->name = $request->name;
         $category->color = $randomColor;
         $category->save();

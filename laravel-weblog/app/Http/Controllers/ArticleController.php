@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
@@ -45,30 +46,19 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'body' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'category_id' => 'required|exists:categories,id',
-            'is_premium' => 'nullable|boolean',
-        ]);
+        $validated = $request->validated();
 
         if($request->hasFile('image')){
             $path = $request->file('image')->store('article_images', 'public');
         };
 
-        $article = Article::create([
-            'user_id' => Auth::id(),
-            'title' => $request->title,
-            'body' => $request->body,
-            'category_id' => $request->category_id,
-            'image' => $path ?? null,
-            'is_premium' => $request->has('is_premium') ? true : false,
-        ]);
+        $validated['user_id'] = Auth::id();
+        $validated['image'] = $path;
+        $validated['is_premium'] = $request->has('is_premium') ? true : false;
 
-        $article->save();
+        Article::create($validated);
 
         return redirect()->route('user.articles', ['user' => Auth::id()])
         ->with('success', 'Article created successfully.');
@@ -108,6 +98,7 @@ class ArticleController extends Controller
             abort(403);
         }
 
+        // TODO :: Request class voor maken
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
@@ -133,7 +124,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $user = Auth::user();
         $article->delete();
 
         return redirect()->route('user.articles', ['user' => Auth::id()])

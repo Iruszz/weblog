@@ -25,12 +25,9 @@ class SessionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreArticleRequest $request): RedirectResponse
     {
-        $attributes = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
-        ]);
+        $validated = $request->validated();
 
         if (! Auth::attempt($attributes)) {
             throw ValidationException::withMessages([
