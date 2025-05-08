@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +23,13 @@ class UserController extends Controller
         return view('auth.register', ['hideFooter' => true]);
     }
 
-    public function store(StoreArticleRequest $request)
+    public function store(StoreUserRequest $request)
     {
 
         // TODO :: request voor maken
         $validated = $request->validated();
 
-        $user = User::create($attributes);
+        $user = User::create($validated);
 
         Auth::login($user);
 

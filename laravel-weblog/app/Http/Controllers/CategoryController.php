@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -26,7 +27,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreArticleRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         // TODO :: Request voor maken en mass assignment toepassen
         $validated = $request->validated();
@@ -38,7 +39,7 @@ class CategoryController extends Controller
         $category->color = $randomColor;
         $category->save();
 
-       return back();
+        return redirect()->route('articles.index')->with('openDropdown', true);;
     }
 
     /**

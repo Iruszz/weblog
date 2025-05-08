@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSessionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -25,11 +26,11 @@ class SessionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreArticleRequest $request): RedirectResponse
+    public function store(StoreSessionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
-        if (! Auth::attempt($attributes)) {
+        if (! Auth::attempt($validated)) {
             throw ValidationException::withMessages([
             'email' => 'The provided credentials are incorrect.',
             'password' => 'The provided credentials are incorrect.'

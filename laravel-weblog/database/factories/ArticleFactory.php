@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class ArticleFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id,
-            'category_id' => User::inRandomOrder()->first()->id,
+            'category_id' => Category::inRandomOrder()->first()->id,
             'title' => $this->faker->sentence(),
             'body' => $this->faker->paragraph(),
         ];
