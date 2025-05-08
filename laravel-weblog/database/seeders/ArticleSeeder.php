@@ -15,8 +15,6 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $categoryIds = Category::pluck('id');
-
         $imagePath = storage_path('app/public/article_images');
         $files = collect(scandir($imagePath))->filter(function($file) {
             return !in_array($file, ['.', '..']) && preg_match('/\.(jpg|jpeg|png)$/i', $file);
@@ -26,8 +24,6 @@ class ArticleSeeder extends Seeder
         ->count(20)
         ->make()
         ->each(function ($article) use ($categoryIds, $files) {
-            $article->category_id = $categoryIds->random();
-            $article->user_id = User::inRandomOrder()->first()->id;
             $randomImage = $files->random();
             $article->image = 'article_images/' . $randomImage;
 
